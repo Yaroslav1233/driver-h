@@ -3,11 +3,11 @@ import setuptools
 # with open("README.md", "r", encoding = "utf-8") as fh:
 #     long_description = fh.read()
 
-dependencies = ["selenium", "selenium_stealth"]
+dependencies = ["selenium", "selenium_stealth", "webdriver-manager"]
 
 setuptools.setup(
     name = "driver_h",
-    version = "0.0.9",
+    version = "0.0.10",
     author = "Yaroslav O.",
     author_email = "publicyaro1@gmail.com",
     # description = "This package return driver that prevents detection chrome driver while using selenium",
