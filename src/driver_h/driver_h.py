@@ -12,7 +12,7 @@ from time import sleep
 ### user_data_dir_ = directory where data of driver will be saved 
 #  (default folder fdir1 in current directory)
 ###
-def Get(options: Options=None, user_data_dir_:str=None, proxy: str=None):
+def Get(profile: str, options: Options=None, user_data_dir_:str=None, proxy: str=None):
     if options is None: options = Options()
 
     if proxy is not None: options.add_argument("--proxy-server=%s" % proxy)
@@ -31,7 +31,7 @@ def Get(options: Options=None, user_data_dir_:str=None, proxy: str=None):
     options.add_argument("--disable-blink-features=AutomationControlled") 
 
     
-    options.add_argument('--profile-directory=Profile 3')
+    options.add_argument('--profile-directory=%s' % profile)
     options.add_argument("--user-data-dir=%s" % user_data_dir)
     
     br = ChromeDriverManager().install()
