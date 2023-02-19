@@ -13,7 +13,7 @@ from time import sleep
 #  (default folder fdir1 in current directory)
 ###
 def Get(profile: str, options: Options=None, desired_capabilities=None,
-user_data_dir_:str=None, proxy: str=None, **kwargs):
+user_data_dir_:str=None, languages: list = None, proxy: str=None, **kwargs):
     if options is None: options = Options()
 
     if proxy is not None: options.add_argument("--proxy-server=%s" % proxy)
@@ -40,9 +40,11 @@ user_data_dir_:str=None, proxy: str=None, **kwargs):
     desired_capabilities=desired_capabilities, **kwargs)
 
     # AddCookies(driver)
+
+    if languages is None: languages=["en-US", "en"]
     
     stealth(driver,
-        languages=["en-US", "en"],
+        languages=languages,
         vendor="Google Inc.",
         platform="Win32",
         webgl_vendor="Google Inc. (AMD)",
