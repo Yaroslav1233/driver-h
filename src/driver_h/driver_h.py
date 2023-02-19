@@ -12,7 +12,8 @@ from time import sleep
 ### user_data_dir_ = directory where data of driver will be saved 
 #  (default folder fdir1 in current directory)
 ###
-def Get(profile: str, options: Options=None, user_data_dir_:str=None, proxy: str=None):
+def Get(profile: str, options: Options=None, desired_capabilities=None,
+user_data_dir_:str=None, proxy: str=None, **kwargs):
     if options is None: options = Options()
 
     if proxy is not None: options.add_argument("--proxy-server=%s" % proxy)
@@ -35,7 +36,8 @@ def Get(profile: str, options: Options=None, user_data_dir_:str=None, proxy: str
     options.add_argument("--user-data-dir=%s" % user_data_dir)
     
     br = ChromeDriverManager().install()
-    driver= webdriver.Chrome(br, options=options)
+    driver= webdriver.Chrome(br, options=options, 
+    desired_capabilities=desired_capabilities, **kwargs)
 
     # AddCookies(driver)
     
