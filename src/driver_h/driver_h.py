@@ -6,6 +6,8 @@ import os
 from selenium_stealth import stealth
 from time import sleep
 
+br = ChromeDriverManager().install()
+
 
 ### options - Options of webdriver
 ### proxy   - ip of proxy if it's needed
@@ -34,8 +36,7 @@ user_data_dir_:str=None, languages: list = None, proxy: str=None, **kwargs):
     
     options.add_argument('--profile-directory=%s' % profile)
     options.add_argument("--user-data-dir=%s" % user_data_dir)
-    
-    br = ChromeDriverManager().install()
+
     driver= webdriver.Chrome(br, options=options, 
     desired_capabilities=desired_capabilities, **kwargs)
 
