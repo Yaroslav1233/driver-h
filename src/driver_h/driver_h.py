@@ -5,6 +5,7 @@ import os
 
 from selenium_stealth import stealth
 from time import sleep
+import undetected_chromedriver as uc
 
 
 ### options - Options of webdriver
@@ -13,7 +14,7 @@ from time import sleep
 #  (default folder fdir1 in current directory)
 ###
 def Get(profile: str, options: Options=None, desired_capabilities=None,
-user_data_dir_:str=None, languages: list = None, proxy: str=None, br=None, **kwargs):
+user_data_dir_:str=None, languages: list = None, proxy: str=None, br=None, uc_=False, **kwargs):
     if options is None: options = Options()
 
     if proxy is not None: options.add_argument("--proxy-server=%s" % proxy)
@@ -35,24 +36,30 @@ user_data_dir_:str=None, languages: list = None, proxy: str=None, br=None, **kwa
     options.add_argument('--profile-directory=%s' % profile)
     options.add_argument("--user-data-dir=%s" % user_data_dir)
 
-    if br is None: br = ChromeDriverManager().install()
+    if uc_ is False:
+        if br is None: br = ChromeDriverManager().install()
 
-    driver= webdriver.Chrome(br, options=options, 
-    desired_capabilities=desired_capabilities, **kwargs)
+        driver= webdriver.Chrome(br, options=options, 
+        desired_capabilities=desired_capabilities, **kwargs)
+
+    else:
+        driver = uc.Chrome(options=options, 
+        desired_capabilities=desired_capabilities, **kwargs)
 
     # AddCookies(driver)
 
     if languages is None: languages=["en-US", "en"]
     
-    stealth(driver,
-        languages=languages,
-        vendor="Google Inc.",
-        platform="Win32",
-        webgl_vendor="Google Inc. (AMD)",
-        renderer="ANGLE (AMD, AMD Radeon(TM) Graphics Direct3D11 vs_5_0 ps_5_0, D3D11)",
-        # fix_hairline=True,
-        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
-        )
+    if uc is False:
+        stealth(driver,
+            languages=languages,
+            vendor="Google Inc.",
+            platform="Win32",
+            webgl_vendor="Google Inc. (AMD)",
+            renderer="ANGLE (AMD, AMD Radeon(TM) Graphics Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            # fix_hairline=True,
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+            )
 
     sleep(2)
 
