@@ -35,7 +35,8 @@ user_data_dir_:str=None, languages: list = None, proxy: str=None, br=None, uc_=F
         options.add_argument("--disable-blink-features=AutomationControlled") 
 
     
-    options.add_argument('--profile-directory=%s' % profile)
+        options.add_argument('--profile-directory=%s' % profile)
+    
     options.add_argument("--user-data-dir=%s" % user_data_dir)
 
     if uc_ is False:
@@ -46,7 +47,9 @@ user_data_dir_:str=None, languages: list = None, proxy: str=None, br=None, uc_=F
 
     else:
         driver = uc.Chrome(options=options, 
-        desired_capabilities=desired_capabilities, **kwargs)
+        desired_capabilities=desired_capabilities, 
+        user_data_dir=user_data_dir,
+        **kwargs)
 
     # AddCookies(driver)
 
