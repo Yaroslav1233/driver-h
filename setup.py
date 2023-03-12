@@ -7,7 +7,7 @@ dependencies = ["selenium", "selenium_stealth", "webdriver-manager"]
 
 setuptools.setup(
     name = "driver_h",
-    version = "0.1.5",
+    version = "0.1.6",
     author = "Yaroslav O.",
     author_email = "publicyaro1@gmail.com",
     # description = "This package return driver that prevents detection chrome driver while using selenium",
