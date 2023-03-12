@@ -22,15 +22,17 @@ user_data_dir_:str=None, languages: list = None, proxy: str=None, br=None, uc_=F
     if user_data_dir_ is None: p = os.path.abspath(os.getcwd()) + "\\" + "fdir1"
     user_data_dir = p
 
-    options.add_argument("start-maximized")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-gpu")
+    # Preventing detection if is it not undetectable driver
+    if uc_ is False:
+        options.add_argument("start-maximized")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-gpu")
 
-    # Chrome is controlled by automated test software
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    options.add_experimental_option('useAutomationExtension', False)
+        # Chrome is controlled by automated test software
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option('useAutomationExtension', False)
 
-    options.add_argument("--disable-blink-features=AutomationControlled") 
+        options.add_argument("--disable-blink-features=AutomationControlled") 
 
     
     options.add_argument('--profile-directory=%s' % profile)
